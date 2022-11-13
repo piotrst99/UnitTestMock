@@ -145,6 +145,16 @@ namespace UnitTest {
         }
 
         [Test]
+        public void GetCarCource_GetZero_ShouldNotCorrect() {
+            Car car = new Car() {};
+
+            carMock.Setup(x => x.GetCarCource(1)).Returns(0);
+            CarController carController = new CarController(carMock.Object);
+            int result = carController.GetCarCource(1);
+            Assert.AreEqual(result, car.Course);
+        }
+
+        [Test]
         public void GetModelsByMark_GetCount_ShouldCorrect() {
             Car car = new Car() {
                 Id = 1,
@@ -176,7 +186,29 @@ namespace UnitTest {
             IEnumerable<string> result = carController.GetModelsByMark("Fiat");
             Assert.AreEqual(2, result.Count());
         }
+
+        [Test]
+        public void GetModelsByMark_GetCount_ShouldNotCorrect() {
+            Car car2 = new Car() {
+                Id = 2,
+                Mark = "Fiat",
+                Model = "Freemont",
+                Course = 9991,
+                RegisterNumber = "KTT 8722"
+            };
+
+            Car car3 = new Car() {
+                Id = 3,
+                Mark = "Fiat",
+                Model = "Freemont",
+                Course = 54680,
+                RegisterNumber = "RJS PW33"
+            };
+
+            carMock.Setup(x => x.GetModelsByMark("Fiat")).Returns(new List<string>{ "Freemont" });
+            CarController carController = new CarController(carMock.Object);
+            IEnumerable<string> result = carController.GetModelsByMark("Fiat");
+            Assert.AreNotEqual(2, result.Count());
+        }
     }
 }
-
-// https://medium.com/@martinrybak/a-cleaner-way-to-create-mocks-in-net-6e039c3d1db0
