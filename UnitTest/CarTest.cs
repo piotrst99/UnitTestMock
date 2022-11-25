@@ -14,8 +14,10 @@ using P2_UnitTestMock.Services;
 namespace UnitTest {
     [TestFixture]
     public class CarTest {
+        // mockowanie danych
         public Mock<ICarService> carMock = new Mock<ICarService>();
-        
+
+        // pubranie 1 pojazdu - powinien zwrocic obiekt klasy Car
         [Test]
         public void GetCar_GetOneCar_ShouldCorrect() {
             Car car = new Car() {
@@ -32,6 +34,7 @@ namespace UnitTest {
             Assert.AreEqual(result, car);
         }
 
+        // dodanie 1 pojazdu z klasy Car - powinno zwracac null
         [Test]
         public void GetCar_GetNull_ShouldCorrect() {
             Car car = new Car() {
@@ -48,6 +51,7 @@ namespace UnitTest {
             Assert.AreNotEqual(result, car);
         }
 
+        // pobiera wszystkie pojazdy - powinno zwraca listę obiektów z klady Car
         [Test]
         public void GetCars_GetCount_ShouldCorrect() {
             Car car = new Car() {
@@ -80,6 +84,7 @@ namespace UnitTest {
             Assert.AreEqual(3, result.Count());
         }
 
+        // pobiera pojazd po podaniu numeru rejestracyjnego - powieien zwracac obiekt klasy Car
         [Test]
         public void GetCarByRegisterNumber_GetOneCar_ShouldCorrect() {
             Car car = new Car() {
@@ -96,6 +101,7 @@ namespace UnitTest {
             Assert.AreEqual(result, car);
         }
 
+        // pobiera pojazd po podaniu numeru rejestracyjnego - powinien zwracac null
         [Test]
         public void GetCarByRegisterNumber_GetNull_ShouldCorrect() {
             Car car = new Car() {
@@ -112,6 +118,7 @@ namespace UnitTest {
             Assert.AreNotEqual(result, car);
         }
         
+        // pobranie wartośc przebiegu - powinien zwracac wartosc
         [Test]
         public void GetCarCource_GetValue_ShouldCorrect() {
             Car car = new Car() {
@@ -128,6 +135,7 @@ namespace UnitTest {
             Assert.AreEqual(result, car.Course);
         }
 
+        // pobranie wartośc przebiegu - powinien zwracac 0
         [Test]
         public void GetCarCource_GetZero_ShouldCorrect() {
             Car car = new Car() {
@@ -144,6 +152,7 @@ namespace UnitTest {
             Assert.AreNotEqual(result, car.Course);
         }
 
+        // pobranie wartośc przebiegu - nie powinien zwracac 0
         [Test]
         public void GetCarCource_GetZero_ShouldNotCorrect() {
             Car car = new Car() {};
@@ -154,6 +163,7 @@ namespace UnitTest {
             Assert.AreEqual(result, car.Course);
         }
 
+        // pobranie modeli na podstawie marek - powinien zwracac listę string
         [Test]
         public void GetModelsByMark_GetCount_ShouldCorrect() {
             Car car = new Car() {
@@ -187,6 +197,7 @@ namespace UnitTest {
             Assert.AreEqual(2, result.Count());
         }
 
+        // pobranie modeli na podstawie marek - powinien zwracac zla wartosc
         [Test]
         public void GetModelsByMark_GetCount_ShouldNotCorrect() {
             Car car2 = new Car() {
